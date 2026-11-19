@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>To-Do List Dashboard</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="app-header">
+    <h1>Dashboard</h1>
+  </header>
+
+  <main class="dashboard">
+    <!-- Top row: Greeting, Focus Timer, Quick Links -->
+    <section id="greeting-section" class="panel" aria-label="Greeting">
+      <h2>Greeting</h2>
+      <div class="greeting-clock" id="greeting-time" aria-live="off">--:--</div>
+      <div class="greeting-date" id="greeting-date"></div>
+      <div class="greeting-text" id="greeting-text"></div>
+    </section>
+
+    <section id="timer-section" class="panel" aria-label="Focus Timer">
+      <h2>Focus Timer</h2>
+      <div class="timer-display" id="timer-display" aria-live="off">25:00</div>
+      <div class="timer-controls">
+        <button id="timer-start" type="button">Start</button>
+        <button id="timer-stop" type="button">Stop</button>
+        <button id="timer-reset" type="button">Reset</button>
+      </div>
+    </section>
+
+    <section id="quicklinks-section" class="panel" aria-label="Quick Links">
+      <h2>Quick Links</h2>
+      <form class="quicklinks-form" id="quicklinks-form">
+        <input id="quicklink-label" type="text" placeholder="Label" aria-label="Link label" />
+        <input id="quicklink-url" type="url" placeholder="https://example.com" aria-label="Link URL" />
+        <button type="submit">Add Link</button>
+      </form>
+      <div class="quicklinks-list" id="quicklinks-list"></div>
+    </section>
+
+    <!-- Bottom: To-Do List -->
+    <section id="todo-section" class="panel" aria-label="To-Do List">
+      <h2>To-Do List</h2>
+      <form class="todo-form" id="todo-form">
+        <input id="todo-input" type="text" placeholder="Add a new task..." aria-label="New task" />
+        <button type="submit">Add</button>
+      </form>
+      <ul class="todo-list" id="todo-list"></ul>
+    </section>
+  </main>
+
+  <!-- Classic (non-module) scripts, loaded with defer in dependency order.
+       defer preserves document order, so they execute: storage -> greeting ->
+       timer -> todo -> quicklinks -> app, after the DOM is parsed. -->
+  <script src="js/storage.js" defer></script>
+  <script src="js/greeting.js" defer></script>
+  <script src="js/timer.js" defer></script>
+  <script src="js/todo.js" defer></script>
+  <script src="js/quicklinks.js" defer></script>
+  <script src="js/app.js" defer></script>
+</body>
+</html>

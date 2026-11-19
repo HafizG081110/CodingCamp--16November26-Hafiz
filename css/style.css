@@ -1,0 +1,188 @@
+/* style.css — Layout (Grid/Flex), themes, responsive rules.
+ * Skeleton/starter for Task 1; the full layout, themes, and responsive rules
+ * are completed in Task 8.2. This provides a working responsive base using CSS
+ * Grid for the top-level arrangement and Flexbox where appropriate.
+ */
+
+:root {
+  /* Theme custom properties (starter set) */
+  --color-bg: #f5f7fa;
+  --color-panel: #ffffff;
+  --color-text: #1f2933;
+  --color-muted: #52606d;
+  --color-accent: #3b82f6;
+  --color-border: #e4e7eb;
+  --color-danger: #dc2626;
+
+  --radius: 12px;
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --space: 16px;
+}
+
+/* Optional dark theme driven by the OS preference (starter). */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #0f172a;
+    --color-panel: #1e293b;
+    --color-text: #e2e8f0;
+    --color-muted: #94a3b8;
+    --color-border: #334155;
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+.app-header {
+  padding: var(--space);
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+/* Top-level grid layout.
+ * Desktop: Greeting, Focus Timer, Quick Links across the top row;
+ * the To-Do List spans the full width below. */
+.dashboard {
+  display: grid;
+  gap: var(--space);
+  padding: var(--space);
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas:
+    "greeting timer quicklinks"
+    "todo todo todo";
+}
+
+#greeting-section { grid-area: greeting; }
+#timer-section { grid-area: timer; }
+#quicklinks-section { grid-area: quicklinks; }
+#todo-section { grid-area: todo; }
+
+.panel {
+  background: var(--color-panel);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: var(--space);
+}
+
+.panel h2 {
+  margin: 0 0 var(--space);
+  font-size: 1.1rem;
+}
+
+/* Greeting */
+.greeting-clock {
+  font-size: 2.25rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  font-variant-numeric: tabular-nums;
+}
+.greeting-date {
+  color: var(--color-muted);
+}
+.greeting-text {
+  font-size: 1.1rem;
+  margin-top: 4px;
+}
+
+/* Timer */
+.timer-display {
+  font-size: 2.5rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  text-align: center;
+}
+.timer-controls {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: var(--space);
+}
+
+/* Quick Links */
+.quicklinks-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.quicklinks-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: var(--space);
+}
+
+/* To-Do */
+.todo-form {
+  display: flex;
+  gap: 8px;
+}
+.todo-list {
+  list-style: none;
+  margin: var(--space) 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Buttons & inputs */
+button {
+  font: inherit;
+  padding: 8px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-panel);
+  color: var(--color-text);
+  cursor: pointer;
+}
+button:hover {
+  border-color: var(--color-accent);
+}
+input {
+  font: inherit;
+  padding: 8px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+/* Let the label field grow within the quick links form. */
+#quicklink-label {
+  flex: 1 1 8rem;
+}
+#quicklink-url {
+  flex: 2 1 14rem;
+}
+
+/* Responsive: collapse to a single column on narrow viewports,
+ * stacking the sections in source order. */
+@media (max-width: 760px) {
+  .dashboard {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "greeting"
+      "timer"
+      "quicklinks"
+      "todo";
+  }
+}

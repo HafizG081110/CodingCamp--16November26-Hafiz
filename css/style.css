@@ -457,6 +457,33 @@ button {
   border-radius: 8px;
   cursor: pointer;
 }
+/* FIX DASHBOARD HEADER */
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  padding: 20px;
+  gap: 20px;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+#theme-toggle {
+  flex-shrink: 0;
+  margin: 0;
+}
+
+/* Responsive untuk layar kecil */
+@media (max-width: 600px) {
+  .app-header {
+    flex-wrap: wrap;
+  }
+}
 
 /* Responsive: collapse to a single column on narrow viewports,
  * stacking the sections in source order. */

@@ -1,0 +1,6 @@
+# Dependencies (dev/test only — the app itself has no runtime dependencies)
+node_modules/
+
+# Test / build artifacts
+coverage/
+dist/

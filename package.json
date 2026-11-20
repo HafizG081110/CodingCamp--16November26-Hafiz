@@ -1,0 +1,15 @@
+{
+  "name": "todo-dashboard",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "To-Do List Dashboard — standalone client-side dashboard (HTML/CSS/JS, no backend).",
+  "scripts": {
+    "test": "vitest --run"
+  },
+  "devDependencies": {
+    "fast-check": "^3.0.0",
+    "jsdom": "^25.0.0",
+    "vitest": "^3.0.0"
+  }
+}

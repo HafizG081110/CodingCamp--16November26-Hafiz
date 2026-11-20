@@ -20,33 +20,36 @@
 
   <main class="dashboard">
 
-    <!-- Greeting -->
-    <section 
-<div id="custom-name-area">
-  <div id="personal-greeting"></div>
+ <section id="greeting-section" class="panel" aria-label="Greeting">
+  <h2>Greeting</h2>
 
-  <form id="name-form">
-    <input
-      type="text"
-      id="name-input"
-      placeholder="Enter your name..."
-      maxlength="30"
-    />
+  <!-- Clock -->
+  <div class="greeting-clock" id="greeting-time">
+    --:--:--
+  </div>
 
-    <button type="submit">Save Name</button>
-  </form>
-</div>
+  <!-- Date -->
+  <div class="greeting-date" id="greeting-date"></div>
 
+  <!-- Original Greeting -->
+  <div class="greeting-text" id="greeting-text"></div>
 
-      <div class="greeting-clock" id="greeting-time">
-        --:--
-      </div>
+  <!-- Custom Name -->
+  <div id="custom-name-area">
+    <div id="personal-greeting"></div>
 
-      <div class="greeting-date" id="greeting-date"></div>
+    <form id="name-form">
+      <input
+        type="text"
+        id="name-input"
+        placeholder="Enter your name..."
+        maxlength="30"
+      />
 
-      <div class="greeting-text" id="greeting-text"></div>
-    </section>
-
+      <button type="submit">Save Name</button>
+    </form>
+  </div>
+</section>
     <!-- Focus Timer -->
     <section id="timer-section" class="panel" aria-label="Focus Timer">
       <h2>Focus Timer</h2>

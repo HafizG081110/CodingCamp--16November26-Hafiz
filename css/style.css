@@ -173,6 +173,258 @@ input {
 #quicklink-url {
   flex: 2 1 14rem;
 }
+/* Custom Focus Timer Settings */
+.timer-settings {
+  margin-top: 16px;
+  padding: 14px;
+  border-radius: 12px;
+  background: var(--color-card);
+}
+
+.timer-settings label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.timer-settings-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.timer-settings-controls input {
+  width: 100%;
+  min-width: 0;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.timer-settings-controls button {
+  padding: 10px 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.timer-settings small {
+  display: block;
+  margin-top: 8px;
+  opacity: 0.7;
+}
+
+
+/* ============================= */
+/* LIGHT & DARK THEME SYSTEM   */
+/* ============================= */
+
+:root {
+  color-scheme: dark;
+
+  --color-bg: #111827;
+  --color-card: #1f2937;
+  --color-text: #f9fafb;
+  --color-border: #374151;
+  --color-muted: #9ca3af;
+  --color-primary: #818cf8;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --color-bg: #f3f4f6;
+  --color-card: #ffffff;
+  --color-text: #1f2937;
+  --color-border: #d1d5db;
+  --color-muted: #6b7280;
+  --color-primary: #6366f1;
+}
+
+/* Main background */
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  transition: background 0.25s, color 0.25s;
+}
+
+/* Dashboard panels */
+.panel {
+  background: var(--color-card);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  transition: background 0.25s, color 0.25s;
+}
+
+/* Header */
+.app-header {
+  background: var(--color-card);
+  color: var(--color-text);
+}
+
+/* Inputs */
+input,
+textarea,
+select {
+  background: var(--color-bg);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+
+/* Buttons */
+button {
+  transition: background 0.2s, color 0.2s;
+}
+
+/* Theme button */
+#theme-toggle {
+  padding: 10px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  background: var(--color-card);
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+#theme-toggle:hover {
+  opacity: 0.8;
+}
+
+/* Secondary text */
+.timer-settings small {
+  color: var(--color-muted);
+}
+
+
+/* ========================================
+   LIGHT / DARK MODE
+======================================== */
+
+/* DEFAULT DARK THEME */
+:root,
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --color-bg: #0f172a;
+  --color-card: #1e293b;
+  --color-text: #e2e8f0;
+  --color-border: #334155;
+  --color-muted: #94a3b8;
+  --color-primary: #818cf8;
+
+  --theme-button-bg: #1e293b;
+  --theme-button-text: #e2e8f0;
+}
+
+/* LIGHT THEME */
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --color-bg: #f1f5f9;
+  --color-card: #ffffff;
+  --color-text: #1e293b;
+  --color-border: #d1d5db;
+  --color-muted: #64748b;
+  --color-primary: #6366f1;
+
+  --theme-button-bg: #ffffff;
+  --theme-button-text: #1e293b;
+}
+
+/* BODY */
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* HEADER */
+.app-header {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+/* DASHBOARD PANELS */
+.panel {
+  background-color: var(--color-card);
+  color: var(--color-text);
+  border-color: var(--color-border);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* HEADINGS */
+h1,
+h2,
+h3 {
+  color: var(--color-text);
+}
+
+/* INPUTS */
+input,
+textarea,
+select {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+/* PLACEHOLDER */
+input::placeholder,
+textarea::placeholder {
+  color: var(--color-muted);
+}
+
+/* BUTTONS */
+button {
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+/* THEME BUTTON */
+#theme-toggle {
+  background-color: var(--theme-button-bg);
+  color: var(--theme-button-text);
+  border: 1px solid var(--color-border);
+  padding: 10px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#theme-toggle:hover {
+  opacity: 0.8;
+}
+
+/* TIMER DISPLAY */
+.timer-display {
+  color: var(--color-text);
+}
+
+/* GREETING */
+.greeting-clock,
+.greeting-date,
+.greeting-text {
+  color: var(--color-text);
+}
+
+/* TODO LIST */
+.todo-list {
+  color: var(--color-text);
+}
+
+/* QUICK LINKS */
+.quicklinks-list {
+  color: var(--color-text);
+}
+
+/* SMOOTH THEME TRANSITION */
+* {
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
 
 /* Responsive: collapse to a single column on narrow viewports,
  * stacking the sections in source order. */

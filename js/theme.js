@@ -1,34 +1,42 @@
 
-/* theme.js — Light / Dark Mode */
+/* theme.js — Light and Dark Mode */
 
-(function (global)  {
+(function (global) {
   "use strict";
 
   global.Dashboard = global.Dashboard || {};
 
   var ThemeModule = {
+
     init: function () {
       var button = document.getElementById("theme-toggle");
-      var savedTheme = localStorage.getItem("dashboard-theme");
+
+      var savedTheme = null;
+
+      try {
+        savedTheme = localStorage.getItem("dashboard-theme");
+      } catch (e) {
+        savedTheme = null;
+      }
 
       var theme = savedTheme || "dark";
 
       this.applyTheme(theme);
 
-      if (button) {
-        this.updateButton(button, theme);
+      if (!button) return;
 
-        button.addEventListener("click", function () {
-          var currentTheme =
-            document.documentElement.getAttribute("data-theme");
+      this.updateButton(button, theme);
 
-          var newTheme =
-            currentTheme === "dark" ? "light" : "dark";
+      button.addEventListener("click", function () {
+        var currentTheme =
+          document.documentElement.getAttribute("data-theme");
 
-          ThemeModule.applyTheme(newTheme);
-          ThemeModule.updateButton(button, newTheme);
-        });
-      }
+        var newTheme =
+          currentTheme === "dark" ? "light" : "dark";
+
+        ThemeModule.applyTheme(newTheme);
+        ThemeModule.updateButton(button, newTheme);
+      });
     },
 
     applyTheme: function (theme) {
@@ -40,7 +48,7 @@
       try {
         localStorage.setItem("dashboard-theme", theme);
       } catch (e) {
-        // Theme still works without storage
+        // Theme can still work without localStorage
       }
     },
 
@@ -51,6 +59,7 @@
         button.textContent = "🌙 Dark Mode";
       }
     }
+
   };
 
   global.Dashboard.ThemeModule = ThemeModule;

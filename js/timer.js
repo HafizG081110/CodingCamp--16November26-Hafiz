@@ -191,6 +191,7 @@
       }
     }
   };
+  
 
   global.Dashboard.TimerModule = TimerModule;
   global.TimerModule = TimerModule;

@@ -6,32 +6,30 @@
 
   global.Dashboard = global.Dashboard || {};
 
-  function boot() {
-    var d = global.Dashboard;
+  
+function boot() {
+  var d = global.Dashboard;
 
-    // Initialize Theme
-    d.ThemeModule.init();
+  d.ThemeModule.init();
 
-    // Initialize Greeting
-    d.GreetingModule.init(
-      document.getElementById("greeting-section")
-    );
+  d.GreetingModule.init(
+    document.getElementById("greeting-section")
+  );
 
-    // Initialize Focus Timer
-    d.TimerModule.init(
-      document.getElementById("timer-section")
-    );
+  d.CustomNameModule.init();
 
-    // Initialize To-Do List
-    d.TodoModule.init(
-      document.getElementById("todo-section")
-    );
+  d.TimerModule.init(
+    document.getElementById("timer-section")
+  );
 
-    // Initialize Quick Links
-    d.QuickLinksModule.init(
-      document.getElementById("quicklinks-section")
-    );
-  }
+  d.TodoModule.init(
+    document.getElementById("todo-section")
+  );
+
+  d.QuickLinksModule.init(
+    document.getElementById("quicklinks-section")
+  );
+}
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", boot);

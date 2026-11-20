@@ -426,6 +426,38 @@ button {
     border-color 0.2s ease;
 }
 
+/* CUSTOM GREETING */
+
+#custom-name-area {
+  margin-top: 16px;
+}
+
+#personal-greeting {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--color-primary);
+}
+
+#name-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+#name-input {
+  flex: 1;
+  min-width: 150px;
+  padding: 10px 12px;
+  border-radius: 8px;
+}
+
+#name-form button {
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
 /* Responsive: collapse to a single column on narrow viewports,
  * stacking the sections in source order. */
 @media (max-width: 760px) {

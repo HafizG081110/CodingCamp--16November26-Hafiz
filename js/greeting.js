@@ -1,88 +1,131 @@
-/* greeting.js — GreetingModule: clock + time-of-day greeting.
- * Implementation for Task 3.1.
- * User-facing text is rendered via textContent (never innerHTML).
- */
-(function (global) {
+
+/* greeting.js — Clock, Date, Greeting & Custom Name */
+
+(function (global)  {
   "use strict";
 
   global.Dashboard = global.Dashboard || {};
 
   var GreetingModule = {
-    // Cached DOM references (populated by init) so updateGreeting does not
-    // re-query the DOM on every tick — keeps it testable in isolation.
-    _rootEl: null,
-    _timeEl: null,
-    _dateEl: null,
-    _textEl: null,
-    _intervalId: null,
 
-    // Mount into #greeting-section and start the 1-second clock.
+    root: null,
+    clockEl: null,
+    dateEl: null,
+    greetingEl: null,
+    nameEl: null,
+    nameInput: null,
+    intervalId: null,
+
     init: function (rootEl) {
-      this._rootEl = rootEl || null;
+      this.root = rootEl;
 
-      // Cache references to the display elements within the root.
-      if (this._rootEl) {
-        this._timeEl = this._rootEl.querySelector("#greeting-time");
-        this._dateEl = this._rootEl.querySelector("#greeting-date");
-        this._textEl = this._rootEl.querySelector("#greeting-text");
-      } else {
-        this._timeEl = null;
-        this._dateEl = null;
-        this._textEl = null;
+      this.clockEl = document.getElementById("greeting-time");
+      this.dateEl = document.getElementById("greeting-date");
+      this.greetingEl = document.getElementById("greeting-text");
+      this.nameEl = document.getElementById("personal-greeting");
+      this.nameInput = document.getElementById("name-input");
+
+      // Stop old clock if initialized previously
+      if (this.intervalId !== null) {
+        clearInterval(this.intervalId);
       }
 
-      // Avoid leaking/duplicating a previous interval if init is called again.
-      if (this._intervalId !== null) {
-        global.clearInterval(this._intervalId);
-        this._intervalId = null;
+      // Load saved name
+      var savedName = "";
+
+      try {
+        savedName = localStorage.getItem("dashboard-name") || "";
+      } catch (e) {
+        savedName = "";
       }
 
-      // Render once immediately so the display is populated on load (Req 1.1).
-      this.updateGreeting();
+      if (this.nameInput) {
+        this.nameInput.value = savedName;
+      }
 
-      // Start the 1-second clock that refreshes the display (Req 1.2).
+      this.renderName(savedName);
+      this.update();
+
+      // Update clock every second
       var self = this;
-      this._intervalId = global.setInterval(function () {
-        self.updateGreeting();
+
+      this.intervalId = setInterval(function () {
+        self.update();
       }, 1000);
+
+      // Name form
+      var form = document.getElementById("name-form");
+
+      if (form) {
+        form.addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          var name = self.nameInput.value.trim();
+
+          try {
+            localStorage.setItem("dashboard-name", name);
+          } catch (e) {}
+
+          self.renderName(name);
+        });
+      }
     },
 
-    // Read the clock now and render. Testable in isolation (uses cached refs).
-    updateGreeting: function () {
+    update: function () {
       var now = new Date();
-      var hour = now.getHours();
-      var timeStr = now.toLocaleTimeString();
-      var dateStr = now.toLocaleDateString();
-      var greeting = this.getGreeting(hour);
 
-      // Guard against missing elements: never throw if unbound.
-      if (this._timeEl) {
-        this._timeEl.textContent = timeStr;
+      // Digital clock
+      if (this.clockEl) {
+        this.clockEl.textContent =
+          now.toLocaleTimeString("id-ID", {
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+            hour12: false
+          });
       }
-      if (this._dateEl) {
-        this._dateEl.textContent = dateStr;
+
+      // Date
+      if (this.dateEl) {
+        this.dateEl.textContent =
+          now.toLocaleDateString("id-ID", {
+            weekday: "long",
+            day: "numeric",
+            month: "long",
+            year: "numeric"
+          });
       }
-      if (this._textEl) {
-        this._textEl.textContent = greeting;
+
+      // Greeting based on time
+      if (this.greetingEl) {
+        var hour = now.getHours();
+        var message;
+
+        if (hour >= 4 && hour < 11) {
+          message = "Good morning";
+        } else if (hour >= 11 && hour < 15) {
+          message = "Good afternoon";
+        } else if (hour >= 15 && hour < 18) {
+          message = "Good evening";
+        } else {
+          message = "Good night";
+        }
+
+        this.greetingEl.textContent = message;
       }
     },
 
-    // Pure: map an hour (0-23) to a greeting string. Same input -> same output,
-    // no side effects, no reads of external state.
-    getGreeting: function (hour) {
-      // 5-11 morning, 12-16 afternoon, 17-20 evening, else night.
-      if (hour >= 5 && hour <= 11) {
-        return "Good morning";
-      } else if (hour >= 12 && hour <= 16) {
-        return "Good afternoon";
-      } else if (hour >= 17 && hour <= 20) {
-        return "Good evening";
+    renderName: function (name) {
+      if (!this.nameEl) return;
+
+      if (name) {
+        this.nameEl.textContent = "Welcome, " + name + "!";
       } else {
-        return "Good night";
+        this.nameEl.textContent = "Welcome!";
       }
     }
   };
 
   global.Dashboard.GreetingModule = GreetingModule;
-  global.GreetingModule = GreetingModule;
-})(typeof window !== "undefined" ? window : this);
+
+})(window);

@@ -6,30 +6,32 @@
 
   global.Dashboard = global.Dashboard || {};
 
-  
-function boot() {
-  var d = global.Dashboard;
+  function boot() {
+    var d = global.Dashboard;
 
-  d.ThemeModule.init();
+    // Theme
+    d.ThemeModule.init();
 
-  d.GreetingModule.init(
-    document.getElementById("greeting-section")
-  );
+    // Greeting, clock, date, and custom name
+    d.GreetingModule.init(
+      document.getElementById("greeting-section")
+    );
 
-  d.CustomNameModule.init();
+    // Focus Timer
+    d.TimerModule.init(
+      document.getElementById("timer-section")
+    );
 
-  d.TimerModule.init(
-    document.getElementById("timer-section")
-  );
+    // To-Do List
+    d.TodoModule.init(
+      document.getElementById("todo-section")
+    );
 
-  d.TodoModule.init(
-    document.getElementById("todo-section")
-  );
-
-  d.QuickLinksModule.init(
-    document.getElementById("quicklinks-section")
-  );
-}
+    // Quick Links
+    d.QuickLinksModule.init(
+      document.getElementById("quicklinks-section")
+    );
+  }
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", boot);
@@ -37,4 +39,4 @@ function boot() {
     boot();
   }
 
-})(typeof window !== "undefined" ? window : this);
+})(window);
